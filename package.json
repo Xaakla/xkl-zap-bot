@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Xaakla/xkl-zap-bot#readme",
   "dependencies": {
-    "@open-wa/wa-automate": "^4.23.3"
+    "@open-wa/wa-automate": "^4.23.3",
+    "moment-timezone": "^0.5.33"
   }
 }
