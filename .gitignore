@@ -1,1 +1,9 @@
 .idea
+node_modules
+
+# managed by open-wa
+**.data.json
+**.node-persist**
+# end managed by open-wa
+
+package-lock.json
