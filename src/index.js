@@ -1,6 +1,21 @@
 const { create, Client, decryptMedia } = require('@open-wa/wa-automate');
 const moment = require('moment-timezone');
 
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+    res.send('Xaakla Bot Running...');
+})
+
+app.listen(port, () => {
+    create(options)
+        .then((client) => start(client))
+        .catch((err) => new Error(err));
+    console.log(`Example app listening at http://localhost:${port}`);
+})
+
 const start = (client = new Client()) => {
     client.onMessage((message) => {
         msgHandler2(client, message);
@@ -191,7 +206,7 @@ async function handleChatCommands(client, message, hasParameters, parameters = [
 
         parseInt(times);
 
-        if (times >= 1000) {
+        if (times >= 500) {
             await client.sendText(from, 'vai se fuder ne');
             await client.sendText(from, `${times} vezes?`);
             await client.sendText(from, 'viro bagunça?');
@@ -443,6 +458,4 @@ const options = {
     ]
 }
 
-create(options)
-    .then((client) => start(client))
-    .catch((err) => new Error(err));
+
