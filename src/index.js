@@ -15,14 +15,14 @@ const processTime = (timestamp, now) => {
 
 async function msgHandler2(client, message) {
     try {
-        console.log('message', message);
+        // console.log('message', message);
 
         const { from, t, type } = message;
 
         if (type === 'chat') {
             let { body } = message;
-
-            if (!isACommand(body)) return console.error('There are no command to execute');
+            console.log(body)
+            if (!isACommand(body) && !body.includes('me floda')) return console.error('There are no command to execute');
 
             handleChatCommands(client, message, false);
 
@@ -174,6 +174,40 @@ async function handleChatCommands(client, message, hasParameters, parameters = [
 
     console.log(identifier);
 
+    if (body.includes('me floda')) {
+        let firstDoubleQuote, lastDoubleQuote, times;
+
+        firstDoubleQuote = body.indexOf('m');
+        lastDoubleQuote = body.indexOf('a', 1);
+        rest = body.substring(lastDoubleQuote + 1).trim()
+
+        firstDoubleQuote = rest.indexOf('v');
+        lastDoubleQuote = rest.indexOf('s');
+        console.log(firstDoubleQuote, lastDoubleQuote)
+        times = rest.substring(0, firstDoubleQuote).trim()
+
+        console.log('times', times);
+        console.log('rest', rest);
+
+        parseInt(times);
+
+        if (times >= 1000) {
+            await client.sendText(from, 'vai se fuder ne');
+            await client.sendText(from, `${times} vezes?`);
+            await client.sendText(from, 'viro bagunça?');
+            await client.sendText(from, 'viro festa??');
+            await client.sendText(from, 'quando o preto n tem o q fazer dá nisso');
+            await client.sendText(from, 'vo executa nao');
+            await client.sendText(from, 'pau no cu');
+
+            return
+        }
+
+        for (let i = 1; i <= times; i++)
+            await client.sendText(from, 'flodando');
+        // console.log('substring', body.substring(lastDoubleQuote + 1).trim());
+    }
+
     switch (body) {
         case '/spam':
             await client.sendText(from, 'ovo manda');
@@ -183,9 +217,10 @@ async function handleChatCommands(client, message, hasParameters, parameters = [
                 .catch((error) => console.error('catch => ', error));
             await client.sendText(from, 'ô mandei');
             break;
+
         case '/battery':
             client.getBatteryLevel()
-                .then((response) => client.sendText(from, `Sua bateria está ${response}%`))
+                .then((response) => client.sendText(from, `Minha bateria está ${response}%`))
                 .catch((error) => console.error('catch => ', error));
             break;
         default:
